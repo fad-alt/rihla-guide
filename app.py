@@ -4,6 +4,7 @@ import os
 import re
 import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -16,6 +17,35 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed"
 )
+
+# ----------------------------------------------------------
+# JAVASCRIPT FIX TO FORCE-REMOVE CLOUD HEADER/RECTANGLES
+# ----------------------------------------------------------
+components.html("""
+    <script>
+        const removeHeaderElements = () => {
+            const selectors = [
+                'header[data-testid="stHeader"]',
+                '[data-testid="stToolbar"]',
+                '[data-testid="stDecoration"]',
+                '[data-testid="stStatusWidget"]',
+                '#MainMenu'
+            ];
+            
+            selectors.forEach(selector => {
+                const elements = window.parent.document.querySelectorAll(selector);
+                elements.forEach(el => {
+                    el.style.display = 'none';
+                    el.style.visibility = 'hidden';
+                    el.style.height = '0px';
+                });
+            });
+        };
+        
+        removeHeaderElements();
+        setInterval(removeHeaderElements, 200);
+    </script>
+""", height=0)
 
 USER_DB_FILE = "users_db.json"
 
@@ -86,7 +116,7 @@ else:
     popover_bg = "#fffefb"
 
 # ----------------------------------------------------------
-# ULTIMATE CSS OVERRIDES (Visual Scale set to ~94% for 6% reduction)
+# ULTIMATE CSS OVERRIDES
 # ----------------------------------------------------------
 st.markdown(f"""
 <style>
@@ -103,7 +133,6 @@ st.markdown(f"""
     font-family: 'Quicksand', sans-serif !important;
 }}
 
-/* COMPLETELY REMOVE THE STREAMLIT HEADER AND STUBBORN RECTANGLES */
 header[data-testid="stHeader"], 
 [data-testid="stHeader"],
 [data-testid="stToolbar"], 
