@@ -86,14 +86,14 @@ else:
     popover_bg = "#fffefb"
 
 # ----------------------------------------------------------
-# ULTIMATE CSS OVERRIDES (Visual Scale set to ~88% for 12% reduction)
+# ULTIMATE CSS OVERRIDES (Visual Scale set to ~94% for 6% reduction)
 # ----------------------------------------------------------
 st.markdown(f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Quicksand:wght@500;600;700&display=swap');
 
 [data-testid="stAppViewContainer"] {{
-    zoom: 0.88 !important;
+    zoom: 0.94 !important;
 }}
 
 [data-testid="stAppViewContainer"], .stApp, header, footer {{
