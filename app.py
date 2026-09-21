@@ -86,7 +86,7 @@ else:
     popover_bg = "#fffefb"
 
 # ----------------------------------------------------------
-# ULTIMATE CSS OVERRIDES (Removing Ghost Bars & Fixing Pins)
+# ULTIMATE CSS OVERRIDES (Removing Ghost Bars & Fixing Scaling)
 # ----------------------------------------------------------
 st.markdown(f"""
 <style>
@@ -121,18 +121,18 @@ section.main > div:first-child {{
 }}
 
 .block-container {{
-    max-width: 1260px !important;
+    max-width: 1050px !important;
     margin: 0 auto !important;
-    padding: 1.5rem 1.5rem !important;
-    padding-top: 1rem !important;
+    padding: 1rem 1rem !important;
+    padding-top: 0.5rem !important;
 }}
 
 .scrapbook-master {{
     background-color: {paper_bg};
     border: 2.5px solid {border_color};
-    border-radius: 32px;
-    padding: 28px;
-    box-shadow: 0 16px 40px rgba(0,0,0,0.05);
+    border-radius: 28px;
+    padding: 24px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.04);
     position: relative;
     margin-top: 0px;
 }}
@@ -140,12 +140,12 @@ section.main > div:first-child {{
 .inspo-header {{
     background: {card_bg};
     border: 2px solid {border_color};
-    border-radius: 24px;
-    padding: 14px 20px;
+    border-radius: 20px;
+    padding: 12px 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);
 }}
 
@@ -157,7 +157,7 @@ h1, h2, h3, .heading-serif {{
 .cursive-note {{
     font-family: 'Caveat', cursive !important;
     color: {subtext_color} !important;
-    font-size: 24px !important;
+    font-size: 22px !important;
     line-height: 1.1 !important;
 }}
 
@@ -170,7 +170,7 @@ div[data-baseweb="input"], .stTextInput input, .stNumberInput input {{
     background-color: {input_bg} !important;
     color: {text_color} !important;
     border: 2px solid {border_color} !important;
-    border-radius: 20px !important;
+    border-radius: 16px !important;
     font-family: 'Quicksand', sans-serif !important;
     font-weight: 600 !important;
 }}
@@ -179,7 +179,7 @@ div[data-baseweb="select"] > div {{
     background-color: {input_bg} !important;
     color: {text_color} !important;
     border: 2px solid {border_color} !important;
-    border-radius: 20px !important;
+    border-radius: 16px !important;
 }}
 
 div[data-baseweb="select"] span {{
@@ -189,22 +189,22 @@ div[data-baseweb="select"] span {{
 div[data-baseweb="popover"], div[data-baseweb="popover"] ul, [data-baseweb="menu"] {{
     background-color: {popover_bg} !important;
     border: 2px solid {border_color} !important;
-    border-radius: 20px !important;
+    border-radius: 16px !important;
 }}
 
 /* Top Navigation Buttons */
 div.stButton > button {{
     width: 100% !important;
-    border-radius: 24px !important;
-    border: 2.5px solid {border_color} !important;
+    border-radius: 20px !important;
+    border: 2px solid {border_color} !important;
     background: {card_bg} !important;
     color: {text_color} !important;
     font-family: 'Playfair Display', serif !important;
-    font-size: 13.5px !important;
+    font-size: 12.5px !important;
     font-weight: 700 !important;
-    padding: 13px 20px !important;
+    padding: 10px 14px !important;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.03);
 }}
 
 div.stButton > button:hover {{
@@ -217,50 +217,50 @@ div.stButton > button[kind="primary"] {{
     background: {accent_color} !important;
     color: #ffffff !important;
     border: none !important;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.1) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
 }}
 
 div.stButton > button[kind="primary"] span {{
     color: #ffffff !important;
 }}
 
-/* Scrapbook Card with Clean Paper Tape (No Bad Red Pushpins) */
+/* Scrapbook Card with Clean Paper Tape */
 .scrapbook-card {{
     background: {card_bg} !important;
     border: 2px solid {border_color} !important;
-    border-radius: 26px !important;
-    padding: 22px !important;
-    box-shadow: {('0 8px 25px rgba(0, 0, 0, 0.15)' if is_dark else '0 8px 25px rgba(0, 0, 0, 0.03)')} !important;
-    margin-bottom: 18px !important;
+    border-radius: 22px !important;
+    padding: 18px !important;
+    box-shadow: {('0 6px 20px rgba(0, 0, 0, 0.12)' if is_dark else '0 6px 20px rgba(0, 0, 0, 0.02)')} !important;
+    margin-bottom: 15px !important;
     position: relative;
 }}
 
 .scrapbook-card::before {{
     content: "";
     position: absolute;
-    top: -10px;
+    top: -8px;
     left: 50%;
     transform: translateX(-50%);
-    width: 70px;
-    height: 18px;
+    width: 60px;
+    height: 15px;
     background: {border_color};
     opacity: 0.6;
-    border-radius: 4px;
+    border-radius: 3px;
 }}
 
 .polaroid-container {{
     position: relative;
     background: {input_bg};
     border: 2px solid {border_color};
-    border-radius: 22px;
-    padding: 12px 12px 16px 12px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    border-radius: 18px;
+    padding: 10px 10px 14px 10px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.03);
 }}
 
 .rect-img-wrapper {{
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
-    height: 160px;
+    height: 140px;
     width: 100%;
 }}
 
@@ -274,40 +274,40 @@ div.stButton > button[kind="primary"] span {{
 .stat-box {{
     background: {card_bg};
     border: 2px solid {border_color};
-    border-radius: 22px;
-    padding: 18px;
+    border-radius: 18px;
+    padding: 14px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.02);
     position: relative;
 }}
 
 .stat-box::before {{
     content: "";
     position: absolute;
-    top: -9px;
+    top: -7px;
     left: 50%;
     transform: translateX(-50%);
-    width: 45px;
-    height: 14px;
+    width: 35px;
+    height: 11px;
     background: {border_color};
     opacity: 0.5;
-    border-radius: 3px;
+    border-radius: 2px;
 }}
 
 .stat-value {{
     font-family: 'Playfair Display', serif !important;
-    font-size: 24px !important;
+    font-size: 20px !important;
     font-weight: 700 !important;
-    margin: 4px 0 !important;
+    margin: 3px 0 !important;
 }}
 
 .stat-label {{
     font-family: 'Quicksand', sans-serif !important;
-    font-size: 10.5px !important;
+    font-size: 9.5px !important;
     font-weight: 700 !important;
     color: {subtext_color} !important;
 }}
@@ -316,10 +316,10 @@ div.stButton > button[kind="primary"] span {{
     background: {input_bg};
     color: {text_color} !important;
     border: 1.5px solid {border_color};
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 14px;
+    padding: 3px 8px;
+    border-radius: 12px;
     font-family: 'Playfair Display', serif;
 }}
 </style>
@@ -380,17 +380,17 @@ def resolve_image(image_val, name_hint=""):
     return "https://images.unsplash.com/photo-1512453979798-5ea26e3a5323?auto=format&fit=crop&w=800&q=80"
 
 # ----------------------------------------------------------
-# SCREEN 1: LOGIN (Balanced Width, Nicely Proportionate Height)
+# SCREEN 1: LOGIN
 # ----------------------------------------------------------
 if not st.session_state.logged_in:
     l_col1, l_col2, l_col3 = st.columns([1, 1.1, 1])
     with l_col2:
         st.markdown(
-            f'<div class="scrapbook-card" style="margin-top: 20px; padding: 36px 32px !important; text-align: center;">'
-            f'<h1 style="font-size: 32px; margin: 0 0 2px 0; font-weight: 700;">RIHLA</h1>'
-            f'<p class="cursive-note" style="margin: 0 0 22px 0; font-size: 24px !important;">Your personal UAE scrapbook travel companion</p>'
-            f'<div style="background:{input_bg}; border: 2px solid {border_color}; border-radius: 18px; padding: 16px; margin-bottom: 20px; text-align: left;">'
-            f'<p style="margin: 0; font-size: 12px; color:{text_color} !important; font-weight: 600; line-height: 1.5;">'
+            f'<div class="scrapbook-card" style="margin-top: 20px; padding: 30px 26px !important; text-align: center;">'
+            f'<h1 style="font-size: 28px; margin: 0 0 2px 0; font-weight: 700;">RIHLA</h1>'
+            f'<p class="cursive-note" style="margin: 0 0 18px 0; font-size: 20px !important;">Your personal UAE scrapbook travel companion</p>'
+            f'<div style="background:{input_bg}; border: 2px solid {border_color}; border-radius: 14px; padding: 14px; margin-bottom: 16px; text-align: left;">'
+            f'<p style="margin: 0; font-size: 11px; color:{text_color} !important; font-weight: 600; line-height: 1.4;">'
             f'<b>Login Security Rule:</b><br>'
             f'• Password must be a mix of letters, numbers, and characters (e.g., P@ssw0rd1!).'
             f'</p></div>',
@@ -400,7 +400,7 @@ if not st.session_state.logged_in:
         user_input = st.text_input("Username", placeholder="Enter any username", key="user_field")
         pass_input = st.text_input("Password", type="password", placeholder="••••••••", key="pass_field")
 
-        st.markdown("<div style='margin-top: 14px;'></div>", unsafe_allow_html=True)
+        st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)
         if st.button("Enter Rihla", type="primary", use_container_width=True):
             u = user_input.strip()
             p = pass_input.strip()
@@ -426,21 +426,20 @@ if not st.session_state.logged_in:
         st.markdown('</div>', unsafe_allow_html=True)
 
 # ----------------------------------------------------------
-# SCREEN 2: MAIN APP
+# SCREEN 2: MAIN APP HEADER & NAVIGATION
 # ----------------------------------------------------------
 else:
     st.markdown('<div class="scrapbook-master">', unsafe_allow_html=True)
 
-    # TOP NAVIGATION BAR
     st.markdown('<div class="inspo-header">', unsafe_allow_html=True)
-    h_logo, h_home, h_exp, h_bud, h_stat, h_abt, h_mode, h_out = st.columns([1.6, 0.7, 0.7, 0.8, 0.7, 0.7, 0.8, 0.7])
+    h_logo, h_home, h_exp, h_bud, h_stat, h_abt, h_mode, h_out = st.columns([1.5, 0.7, 0.7, 0.8, 0.7, 0.7, 0.8, 0.7])
 
     with h_logo:
         st.markdown(
-            f'<div style="display:flex; align-items:center; gap:8px;">'
+            f'<div style="display:flex; align-items:center; gap:6px;">'
             f'<div>'
-            f'<div class="heading-serif" style="font-size:14px; font-weight:700; line-height:1;">RIHLA</div>'
-            f'<div class="cursive-note" style="font-size:12px !important; font-weight:700;">UAE TOURIST GUIDE</div>'
+            f'<div class="heading-serif" style="font-size:13px; font-weight:700; line-height:1;">RIHLA</div>'
+            f'<div class="cursive-note" style="font-size:11px !important; font-weight:700;">UAE TOURIST GUIDE</div>'
             f'</div></div>',
             unsafe_allow_html=True
         )
@@ -611,7 +610,6 @@ else:
                         st.rerun()
                     st.markdown('</div>', unsafe_allow_html=True)
 
-        # Green Footer Banner with Embedded Action Button Inside the Box
         st.markdown(
             f'<div class="scrapbook-card" style="background: {accent_color} !important; margin-top: 26px; padding: 24px 28px !important;">'
             f'<h3 style="color:#ffffff !important; margin:0; font-size:20px;">Plan smart. Travel better.</h3>'
