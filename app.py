@@ -13,7 +13,7 @@ import seaborn as sns
 st.set_page_config(
     page_title="RIHLA | UAE Tourist Guide",
     page_icon="🧭",
-    layout="wide",
+    layout="centered",
     initial_sidebar_state="collapsed"
 )
 
