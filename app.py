@@ -96,28 +96,31 @@ st.markdown(f"""
     zoom: 0.94 !important;
 }}
 
-[data-testid="stAppViewContainer"], .stApp, header, footer {{
+[data-testid="stAppViewContainer"], .stApp, footer {{
     background-color: {desk_bg} !important;
     background-image: none !important;
     color: {text_color} !important;
     font-family: 'Quicksand', sans-serif !important;
 }}
 
+/* COMPLETELY REMOVE THE STREAMLIT HEADER AND STUBBORN RECTANGLES */
 header[data-testid="stHeader"], 
+[data-testid="stHeader"],
 [data-testid="stToolbar"], 
 [data-testid="stDecoration"], 
+[data-testid="stStatusWidget"],
 #MainMenu, 
 footer,
 .stApp > header,
 div[data-testid="stDecoration"],
 div[data-testid="stToolbar"],
-div[data-testid="stVerticalBlock"] > div:empty,
-div[data-testid="stHorizontalBlock"] > div:empty,
-section.main > div:first-child {{
+div[data-testid="stHeader"],
+header {{
     display: none !important;
     height: 0px !important;
     min-height: 0px !important;
     visibility: hidden !important;
+    background: transparent !important;
     margin: 0 !important;
     padding: 0 !important;
     pointer-events: none !important;
