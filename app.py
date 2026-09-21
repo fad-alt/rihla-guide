@@ -86,11 +86,15 @@ else:
     popover_bg = "#fffefb"
 
 # ----------------------------------------------------------
-# ULTIMATE CSS OVERRIDES (Removing Ghost Bars & Fixing Scaling)
+# ULTIMATE CSS OVERRIDES (Visual Scale set to ~88% for 12% reduction)
 # ----------------------------------------------------------
 st.markdown(f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Quicksand:wght@500;600;700&display=swap');
+
+[data-testid="stAppViewContainer"] {{
+    zoom: 0.88 !important;
+}}
 
 [data-testid="stAppViewContainer"], .stApp, header, footer {{
     background-color: {desk_bg} !important;
@@ -99,7 +103,6 @@ st.markdown(f"""
     font-family: 'Quicksand', sans-serif !important;
 }}
 
-/* Completely eliminate Streamlit top wrapper boxes and ghost layout rectangles */
 header[data-testid="stHeader"], 
 [data-testid="stToolbar"], 
 [data-testid="stDecoration"], 
@@ -192,7 +195,6 @@ div[data-baseweb="popover"], div[data-baseweb="popover"] ul, [data-baseweb="menu
     border-radius: 16px !important;
 }}
 
-/* Top Navigation Buttons */
 div.stButton > button {{
     width: 100% !important;
     border-radius: 20px !important;
@@ -224,7 +226,6 @@ div.stButton > button[kind="primary"] span {{
     color: #ffffff !important;
 }}
 
-/* Scrapbook Card with Clean Paper Tape */
 .scrapbook-card {{
     background: {card_bg} !important;
     border: 2px solid {border_color} !important;
