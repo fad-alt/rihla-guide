@@ -86,11 +86,16 @@ else:
     popover_bg = "#fffefb"
 
 # ----------------------------------------------------------
-# ULTIMATE CSS OVERRIDES TO FLUSH TOP LAYOUT
+# ULTIMATE CSS OVERRIDES TO FLUSH TOP LAYOUT & SCALE DOWN 5%
 # ----------------------------------------------------------
 st.markdown(f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Quicksand:wght@500;600;700&display=swap');
+
+/* Scale down the entire app content by roughly 5% */
+.stApp {{
+    zoom: 0.95;
+}}
 
 .stAppHeader, header.stAppHeader, [data-testid="stHeader"], [data-testid="stToolbar"], [data-testid="stDecoration"], [data-testid="stAppToolbar"], [data-testid="stSidebarCollapsedControl"], .stAppDeployButton {{
     display: none !important;
@@ -810,4 +815,3 @@ else:
         ''', unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
-
