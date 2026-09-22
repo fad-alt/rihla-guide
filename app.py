@@ -4,7 +4,6 @@ import os
 import re
 import pandas as pd
 import streamlit as st
-import streamlit.components.v1 as components
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -17,35 +16,6 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed"
 )
-
-# ----------------------------------------------------------
-# JAVASCRIPT FIX TO FORCE-REMOVE CLOUD HEADER/RECTANGLES
-# ----------------------------------------------------------
-components.html("""
-    <script>
-        const removeHeaderElements = () => {
-            const selectors = [
-                'header[data-testid="stHeader"]',
-                '[data-testid="stToolbar"]',
-                '[data-testid="stDecoration"]',
-                '[data-testid="stStatusWidget"]',
-                '#MainMenu'
-            ];
-            
-            selectors.forEach(selector => {
-                const elements = window.parent.document.querySelectorAll(selector);
-                elements.forEach(el => {
-                    el.style.display = 'none';
-                    el.style.visibility = 'hidden';
-                    el.style.height = '0px';
-                });
-            });
-        };
-        
-        removeHeaderElements();
-        setInterval(removeHeaderElements, 200);
-    </script>
-""", height=0)
 
 USER_DB_FILE = "users_db.json"
 
@@ -116,14 +86,45 @@ else:
     popover_bg = "#fffefb"
 
 # ----------------------------------------------------------
-# ULTIMATE CSS OVERRIDES
+# ULTIMATE CSS OVERRIDES TO FLUSH TOP LAYOUT
 # ----------------------------------------------------------
 st.markdown(f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Quicksand:wght@500;600;700&display=swap');
 
-[data-testid="stAppViewContainer"] {{
-    zoom: 0.94 !important;
+.stAppHeader, header.stAppHeader, [data-testid="stHeader"], [data-testid="stToolbar"], [data-testid="stDecoration"], [data-testid="stAppToolbar"], [data-testid="stSidebarCollapsedControl"], .stAppDeployButton {{
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}}
+
+section[data-testid="stMain"], section.stMain {{
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}}
+
+[data-testid="stMainBlockContainer"], div.stMainBlockContainer, section.stMain .block-container {{
+    padding-top: 0.5rem !important;
+    margin-top: 0 !important;
+    max-width: 1050px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}}
+
+[data-testid="stElementContainer"]:has(.scrapbook-master),
+[data-testid="stElementContainer"]:has(.inspo-header) {{
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }}
 
 [data-testid="stAppViewContainer"], .stApp, footer {{
@@ -131,35 +132,6 @@ st.markdown(f"""
     background-image: none !important;
     color: {text_color} !important;
     font-family: 'Quicksand', sans-serif !important;
-}}
-
-header[data-testid="stHeader"], 
-[data-testid="stHeader"],
-[data-testid="stToolbar"], 
-[data-testid="stDecoration"], 
-[data-testid="stStatusWidget"],
-#MainMenu, 
-footer,
-.stApp > header,
-div[data-testid="stDecoration"],
-div[data-testid="stToolbar"],
-div[data-testid="stHeader"],
-header {{
-    display: none !important;
-    height: 0px !important;
-    min-height: 0px !important;
-    visibility: hidden !important;
-    background: transparent !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    pointer-events: none !important;
-}}
-
-.block-container {{
-    max-width: 1050px !important;
-    margin: 0 auto !important;
-    padding: 1rem 1rem !important;
-    padding-top: 0.5rem !important;
 }}
 
 .scrapbook-master {{
@@ -234,9 +206,10 @@ div.stButton > button {{
     background: {card_bg} !important;
     color: {text_color} !important;
     font-family: 'Playfair Display', serif !important;
-    font-size: 12.5px !important;
+    font-size: 13.5px !important;
     font-weight: 700 !important;
-    padding: 10px 14px !important;
+    padding: 11px 15px !important;
+    min-height: 40px !important;
     transition: all 0.2s ease;
     box-shadow: 0 3px 10px rgba(0,0,0,0.03);
 }}
@@ -367,21 +340,24 @@ def load_data():
         df_raw = pd.read_csv("places.csv")
     else:
         df_raw = pd.DataFrame({
-            "Place": ["Sheikh Zayed Grand Mosque", "Burj Al Arab", "Al Qasba", "Al Jahili Fort", "Jebel Jais", "Dubai Miracle Garden", "Louvre Abu Dhabi", "Hatta Dam", "Al Fahidi Historical Neighbourhood"],
-            "Emirate": ["Abu Dhabi", "Dubai", "Sharjah", "Al Ain", "Ras Al Khaimah", "Dubai", "Abu Dhabi", "Hatta", "Dubai"],
-            "Category": ["Grand Mosque", "Luxury Hotel", "Waterfront", "Historical", "Mountain", "Garden", "Museum", "Nature", "Cultural"],
-            "Rating": [4.9, 4.8, 4.7, 4.5, 4.7, 4.6, 4.8, 4.7, 4.6],
-            "Timing": ["9AM - 10PM", "24/7", "10AM - 11PM", "9AM - 5PM", "Open Daily", "9AM - 9PM", "10AM - 6.30PM", "Open Daily", "24/7"],
-            "Entry Fee": ["Free", "AED 250", "Free", "AED 10", "Free", "AED 75", "AED 63", "Free", "Free"],
-            "Description": ["A magnificent masterpiece of modern Islamic architecture.", "World-famous luxury landmark hotel.", "Scenic canal waterfront with cafes and Ferris wheel.", "Historic defensive fort surrounded by lush gardens.", "The highest peak in the UAE with stunning views.", "The world's largest natural flower garden.", "Universal museum showcasing art and humanity.", "Stunning blue waters nestled in the Hajar mountains.", "Historic heritage district with traditional wind-tower architecture."]
+            "Place": ["Sheikh Zayed Grand Mosque", "Burj Khalifa", "Ajman Beach"],
+            "Emirate": ["Abu Dhabi", "Dubai", "Ajman"],
+            "Category": ["Mosque", "Tower", "Beach"],
+            "Rating": [4.9, 4.8, 4.4],
+            "Timing": ["9:00 AM - 10:00 PM", "Open 24 Hours", "Open 24 Hours"],
+            "Entry Fee": ["Free", "AED 150", "Free"],
+            "Description": ["A magnificent mosque in Abu Dhabi.", "The tallest building in the world.", "A peaceful white-sand beach."]
         })
+
+    # Automatically fix row shifts caused by unquoted commas in places.csv
     for i, row in df_raw.iterrows():
         if pd.notna(row.get("Unnamed: 9")) and str(row.get("Unnamed: 9")).strip():
             df_raw.at[i, "Image"] = str(row["Unnamed: 9"]).strip()
+
     return df_raw.loc[:, ~df_raw.columns.str.contains('^Unnamed')].copy()
 
 df = load_data()
-SEARCH_FOLDERS = ["Images", "images", "Documents/RIHLA/Images", "Documents/Images", ""]
+SEARCH_FOLDERS = ["images", "Images", "images_folder", ".", "assets"]
 
 def resolve_image(image_val, name_hint=""):
     candidates = []
@@ -390,9 +366,9 @@ def resolve_image(image_val, name_hint=""):
         candidates.append(val)
         base, ext = os.path.splitext(val)
         if not ext:
-            candidates.extend([f"{val}.jpg", f"{val}.JPG", f"{val}.png"])
+            candidates.extend([f"{val}.jpg", f"{val}.JPG", f"{val}.png", f"{val}.jpeg"])
         else:
-            candidates.extend([f"{base}.jpg", f"{base}.JPG", f"{base}.png"])
+            candidates.extend([f"{base}.jpg", f"{base}.JPG", f"{base}.png", f"{base}.jpeg"])
 
     if name_hint:
         clean = str(name_hint).lower().strip().replace(" ", "_").replace("'", "").replace("-", "_")
@@ -406,8 +382,8 @@ def resolve_image(image_val, name_hint=""):
             if os.path.exists(p):
                 with open(p, "rb") as f:
                     encoded = base64.b64encode(f.read()).decode()
-                ext = p.split('.')[-1].lower()
-                mime = "image/png" if ext == "png" else "image/jpeg"
+                ext_str = p.split('.')[-1].lower()
+                mime = "image/png" if ext_str == "png" else "image/jpeg"
                 return f"data:{mime};base64,{encoded}"
 
     return "https://images.unsplash.com/photo-1512453979798-5ea26e3a5323?auto=format&fit=crop&w=800&q=80"
@@ -465,14 +441,14 @@ else:
     st.markdown('<div class="scrapbook-master">', unsafe_allow_html=True)
 
     st.markdown('<div class="inspo-header">', unsafe_allow_html=True)
-    h_logo, h_home, h_exp, h_bud, h_stat, h_abt, h_mode, h_out = st.columns([1.5, 0.7, 0.7, 0.8, 0.7, 0.7, 0.8, 0.7])
+    h_logo, h_home, h_exp, h_bud, h_stat, h_abt, h_mode, h_out = st.columns([1.75, 0.78, 0.82, 0.88, 0.78, 0.78, 0.88, 0.78])
 
     with h_logo:
         st.markdown(
             f'<div style="display:flex; align-items:center; gap:6px;">'
             f'<div>'
-            f'<div class="heading-serif" style="font-size:13px; font-weight:700; line-height:1;">RIHLA</div>'
-            f'<div class="cursive-note" style="font-size:11px !important; font-weight:700;">UAE TOURIST GUIDE</div>'
+            f'<div class="heading-serif" style="font-size:16px; font-weight:700; line-height:1.05;">RIHLA</div>'
+            f'<div class="cursive-note" style="font-size:12px !important; font-weight:700;">UAE TOURIST GUIDE</div>'
             f'</div></div>',
             unsafe_allow_html=True
         )
@@ -834,3 +810,4 @@ else:
         ''', unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
+
